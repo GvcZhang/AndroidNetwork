@@ -1,13 +1,31 @@
-# AndroidNetwork
+package com.curious.network.sample;
 
-## 介绍  
-基于原生 HttpURLConnection 的网络请求封装，是学习数据模式、OKHttp的好教材
+import android.os.Bundle;
+import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-## 使用 
-```java
-       //可以全局配置
-       httpClient = new SAHttpClient.Builder()
+import com.curious.network.SAHttpLogInterceptor;
+import com.curious.network.base.SAHttpClient;
+import com.curious.network.base.SAHttpUrl;
+import com.curious.network.base.SARequest;
+import com.curious.network.base.SAResponse;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class MainActivity extends AppCompatActivity {
+
+    private ExecutorService executorService = Executors.newFixedThreadPool(2);
+    private SAHttpClient httpClient;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        httpClient = new SAHttpClient.Builder()
                 .urlConnectionFollowRedirects(false)
                 .maxFollows(3)
                 .followRedirects(true)
@@ -18,7 +36,6 @@
                 .connectTimeout(30_000)
                 .build();
 
-        //在线程中启动访问
         executorService.submit(() -> {
             executorService.submit(() -> {
                 SARequest.Builder builder = new SARequest.Builder()
@@ -39,4 +56,5 @@
                 }
             });
         });
-```
+    }
+}
