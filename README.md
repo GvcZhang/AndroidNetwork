@@ -1,7 +1,7 @@
 # AndroidNetwork
 
 ## 介绍  
-基于原生 HttpURLConnection 的网络请求封装，是学习数据模式、OKHttp的好教材
+基于原生 HttpURLConnection 的网络请求封装，是学习设计模式、OKHttp的好教材
 
 
 ## 使用 
